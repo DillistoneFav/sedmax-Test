@@ -1,0 +1,42 @@
+[
+    {
+        "ID": 1,
+        "key": 1,
+        "Name": "John",
+        "Condition": true,
+        "Email": "John@example.com",
+        "Adresses": ["Moscow"]
+    },
+    {
+        "ID": 2,
+        "key": 2,
+        "Name": "Johan",
+        "Condition": true,
+        "Email": "Johan@example.com",
+        "Adresses": ["Moscow", "SPB", "Oslow"]
+    },
+    {
+        "ID": 3,
+        "key": 3,
+        "Name": "Max",
+        "Condition": false,
+        "Email": "Max@example.com",
+        "Adresses": ["Vologda", "SPB"]
+    },
+    {
+        "ID": 4,
+        "key": 4,
+        "Name": "Ita",
+        "Condition": true,
+        "Email": "Ita@example.com",
+        "Adresses": ["Moskow", "Leningrad", "SPB", "NewYork"]
+    },
+    {
+        "ID": 5,
+        "key": 5,
+        "Name": "Kein",
+        "Condition": false,
+        "Email": "Kein@example.com",
+        "Adresses": ["SPB", "Krasnodar", "Kaluga"]
+    }
+]

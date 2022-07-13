@@ -1,35 +1,35 @@
 [
     {
-        "ID": 1,
-        "Name": "John",
+        "key": 1,
+        "title": "John",
         "Condition": true,
         "Email": "John@example.com",
         "Adresses": ["Moscow"]
     },
     {
-        "ID": 2,
-        "Name": "Johan",
+        "key": 2,
+        "title": "Johan",
         "Condition": true,
         "Email": "Johan@example.com",
         "Adresses": ["Moscow", "SPB", "Oslow"]
     },
     {
-        "ID": 3,
-        "Name": "Max",
+        "key": 3,
+        "title": "Max",
         "Condition": false,
         "Email": "Max@example.com",
         "Adresses": ["Vologda", "SPB"]
     },
     {
-        "ID": 4,
-        "Name": "Ita",
+        "key": 4,
+        "title": "Ita",
         "Condition": true,
         "Email": "Ita@example.com",
         "Adresses": ["Moskow", "Leningrad", "SPB", "NewYork"]
     },
     {
-        "ID": 5,
-        "Name": "Kein",
+        "key": 5,
+        "title": "Kein",
         "Condition": false,
         "Email": "Kein@example.com",
         "Adresses": ["SPB", "Krasnodar", "Kaluga"]

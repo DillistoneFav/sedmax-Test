@@ -23,10 +23,10 @@ const FirstPage = () => {
     }
 
     const columns = [
-        { title: 'ID', dataIndex: 'ID', key: 'ID' },
+        { title: 'ID', dataIndex: 'key', key: 'key' },
         { 
             title: 'Name', 
-            dataIndex: 'Name',
+            dataIndex: 'title',
             key: 'Name' ,
             render: (item) => <a onClick={() => goToName(item)}>{item}</a>
         },
@@ -41,7 +41,7 @@ const FirstPage = () => {
             title: 'Adresses', 
             dataIndex: 'Adresses',
             key: 'Adresses', 
-            render: (item) => item + ' '
+            render: (item) => item.join(', ')
         },
     ];
 
@@ -50,7 +50,6 @@ const FirstPage = () => {
             <Table
                 columns={columns}
                 dataSource={data}
-                rowKey="ID"
             />
         </div>
     );

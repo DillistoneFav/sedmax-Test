@@ -1,0 +1,21 @@
+.secondPage{
+    width: 100%;
+    display: flex;
+    padding: 0 10px;
+}
+
+.treeComp{
+    width: 20%;
+    border: 1px solid teal;
+}
+
+.tableComp{
+    width: 80%;
+    border: 1px solid cyan;
+    margin-left: 10px;
+}
+
+.ant-tree.ant-tree-block-node .ant-tree-list-holder-inner .ant-tree-node-content-wrapper {
+    flex: 0 !important;
+    align-items: flex-start !important;
+}

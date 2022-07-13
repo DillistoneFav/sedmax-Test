@@ -6,3 +6,7 @@
   align-items: center;
   justify-content: center;
 }
+
+.ant-tree.ant-tree-block-node .ant-tree-list-holder-inner .ant-tree-node-content-wrapper {
+  flex: unset !important;
+}

@@ -1,7 +1,6 @@
 [
     {
         "ID": 1,
-        "key": 1,
         "Name": "John",
         "Condition": true,
         "Email": "John@example.com",
@@ -9,7 +8,6 @@
     },
     {
         "ID": 2,
-        "key": 2,
         "Name": "Johan",
         "Condition": true,
         "Email": "Johan@example.com",
@@ -17,7 +15,6 @@
     },
     {
         "ID": 3,
-        "key": 3,
         "Name": "Max",
         "Condition": false,
         "Email": "Max@example.com",
@@ -25,7 +22,6 @@
     },
     {
         "ID": 4,
-        "key": 4,
         "Name": "Ita",
         "Condition": true,
         "Email": "Ita@example.com",
@@ -33,7 +29,6 @@
     },
     {
         "ID": 5,
-        "key": 5,
         "Name": "Kein",
         "Condition": false,
         "Email": "Kein@example.com",

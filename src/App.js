@@ -10,17 +10,17 @@ import { routes } from "./components/Router/router";
 
 function App() {
   return (
-    <Router>
-    <div className="App">
-      <Navbar/>
-      <Routes>
-        {routes.map(item => 
-            <Route path={item.path} element={<item.component/>} exact={item.exact} key={item.path}></Route>
-        )}
-            <Route path="*" element={<Navigate to="/error" replace />}></Route>
-      </Routes>
-    </div>
-  </Router>
+      <Router>
+        <div className="App">
+          <Navbar/>
+          <Routes>
+            {routes.map(item => 
+                <Route path={item.path} element={<item.component/>} exact={item.exact} key={item.path}></Route>
+            )}
+                <Route path="*" element={<Navigate to="/error" replace />}></Route>
+          </Routes>
+        </div>
+      </Router>
   );
 }
 

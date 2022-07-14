@@ -12,7 +12,7 @@ const SecondPage = () => {
     const router = useNavigate();
 
     const [newData, setNewData] = useState([]);
-    const [hasData, setHasData] = useState(true);
+    const [hasData, setHasData] = useState(false);
     const [name, setName] = useState('');
 
     const treeData = getTree();
@@ -23,12 +23,6 @@ const SecondPage = () => {
         setName(name);
         router(`/first-page/${name}`);
     }
-
-    useEffect(() => {
-
-    }, [newData])
-
-
 
     const columns = [
         { title: 'ID', dataIndex: 'key', key: 'key' },
@@ -53,18 +47,10 @@ const SecondPage = () => {
         },
     ];
 
-    const onSelect = (selectedKeys, info) => {
-        console.log('selected', selectedKeys, info);
-    };
-
-    useEffect(() => {
-        
-    })
-
     const onCheck = (checkedKeys, info) => {
-        console.log(info);
-        setNewData(info.checkedNodes);
-        console.log(newData);
+        info.checkedNodes.length ? setHasData(true) : setHasData(false);
+        if (info.checkedNodes.length > data.length) setNewData(data);
+        else setNewData(info.checkedNodes);
     }
 
 
@@ -73,7 +59,6 @@ const SecondPage = () => {
             <div className={classes.treeComp}>
                 <DirectoryTree
                     defaultExpandedKeys={['parent 1-0']}
-                    onSelect={onSelect}
                     treeData={treeData}
                     onCheck={onCheck}
                     checkable

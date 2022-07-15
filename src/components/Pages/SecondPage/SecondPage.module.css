@@ -15,7 +15,8 @@
     margin-left: 10px;
 }
 
-.ant-tree.ant-tree-block-node .ant-tree-list-holder-inner .ant-tree-node-content-wrapper {
-    flex: 0 !important;
-    align-items: flex-start !important;
+.Actions{
+    width: 50px;
+    display: flex;
+    justify-content: space-between;
 }

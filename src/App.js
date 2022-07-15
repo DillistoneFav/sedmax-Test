@@ -7,9 +7,16 @@ import {
 import './App.css';
 import Navbar from "./components/Header/Navbar/Navbar";
 import { routes } from "./components/Router/router";
+import { AuthContext } from './components/Context/index';
+import { useState } from 'react';
 
 function App() {
+  const [newData, setNewData] = useState([]);
   return (
+    <AuthContext.Provider value={{
+      newData,
+      setNewData,
+    }}>
       <Router>
         <div className="App">
           <Navbar/>
@@ -21,6 +28,7 @@ function App() {
           </Routes>
         </div>
       </Router>
+    </AuthContext.Provider>
   );
 }
 

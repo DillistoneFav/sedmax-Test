@@ -1,23 +1,28 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import classes from './SecondPage.module.css';
 import { Tree, Table } from 'antd';
+import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import 'antd/dist/antd.css';
-import { getTree, getData } from '../../../store/functions';
+import { getData } from '../../../store/functions';
+import { AuthContext } from '../../Context/index';
 
 const SecondPage = () => {
+    const {newData, setNewData} = useContext(AuthContext)
+
     const { DirectoryTree } = Tree;
     
     const router = useNavigate();
 
-    const [newData, setNewData] = useState([]);
     const [hasData, setHasData] = useState(false);
     const [name, setName] = useState('');
 
-    const treeData = getTree();
     const data = getData();
-    treeData[0].children[0].children = data;
+
+    useEffect(() => {
+        
+    },[newData])
 
     const goToName = (name) => {
         setName(name);
@@ -45,12 +50,19 @@ const SecondPage = () => {
             key: 'Adresses', 
             render: (item) => item + ' '
         },
+        {
+            title: 'Actions',
+            render: () => <div className={classes.Actions}><EditOutlined/><DeleteOutlined/></div>
+        }
     ];
 
     const onCheck = (checkedKeys, info) => {
-        info.checkedNodes.length ? setHasData(true) : setHasData(false);
-        if (info.checkedNodes.length > data.length) setNewData(data);
-        else setNewData(info.checkedNodes);
+        if (info.checkedNodes.length > data.length) {
+            setNewData(data)
+        } else {
+            setNewData(info.checkedNodes);
+        }
+        console.log(newData);
     }
 
 
@@ -59,19 +71,16 @@ const SecondPage = () => {
             <div className={classes.treeComp}>
                 <DirectoryTree
                     defaultExpandedKeys={['parent 1-0']}
-                    treeData={treeData}
+                    treeData={data}
                     onCheck={onCheck}
                     checkable
                 />
             </div>
             <div className={classes.tableComp}>
-            {hasData ? 
                 <Table
                     columns={columns}
                     dataSource={newData}
                 />
-                : <h1>Выберите данные в дереве!</h1>
-            }
             </div>
         </div>
     );

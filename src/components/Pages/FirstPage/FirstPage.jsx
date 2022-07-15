@@ -1,25 +1,29 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Table } from 'antd';
 import 'antd/dist/antd.css';
 
 import { getData } from '../../../store/functions';
+import { AuthContext } from '../../Context/index';
 
 import classes from './FirstPage.module.css';
 
 
 const FirstPage = () => {
+    const {newData, setNewData} = useContext(AuthContext)
+
     const data = getData();
+    console.log(data);
     const router = useNavigate();
     const [name, setName] = useState(undefined);
 
 
     //TODO rework with using ID
-    const goToName = (name) => {
-        setName(name);
-        router(`/first-page/${name}`);
+    const goToName = (selectedRowKey) => {
+        setName(selectedRowKey);
+        router(`/first-page/${selectedRowKey}`);
     }
 
     const columns = [
@@ -28,7 +32,7 @@ const FirstPage = () => {
             title: 'Name', 
             dataIndex: 'title',
             key: 'Name' ,
-            render: (item) => <a onClick={() => goToName(item)}>{item}</a>
+            render: (name) => <a onClick={() => goToName(name)}>{name}</a>
         },
         {
             title: 'Condition', 
@@ -48,8 +52,9 @@ const FirstPage = () => {
     return (
         <div className={classes.Wrapper}>
             <Table
+                rowKey={data.key}
                 columns={columns}
-                dataSource={data}
+                dataSource={data[0].children[0].children}
             />
         </div>
     );

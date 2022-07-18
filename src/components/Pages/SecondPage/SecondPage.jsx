@@ -5,37 +5,26 @@ import classes from './SecondPage.module.css';
 import { Tree, Table } from 'antd';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import 'antd/dist/antd.css';
-import { getData } from '../../../store/functions';
-import { AuthContext } from '../../Context/index';
+import { storeData, newDataState } from '../../../store/dataFunctions';
 
 const SecondPage = () => {
-    const {newData, setNewData} = useContext(AuthContext)
+    const data = storeData.getData();
+    const [newData, setNewData] = useState(newDataState.newData);
+    console.log(newData);
 
     const { DirectoryTree } = Tree;
-    
-    const router = useNavigate();
 
-    const [hasData, setHasData] = useState(false);
-    const [name, setName] = useState('');
-
-    const data = getData();
-
-    useEffect(() => {
-        
-    },[newData])
-
-    const goToName = (name) => {
-        setName(name);
-        router(`/first-page/${name}`);
+    let checkedKeys = [];
+    for (let item of newData) {
+        checkedKeys.push(item.key);
     }
-
+    
     const columns = [
         { title: 'ID', dataIndex: 'key', key: 'key' },
         { 
             title: 'Name', 
             dataIndex: 'title',
             key: 'Name' ,
-            render: (item) => <a onClick={() => goToName(item)}>{item}</a>
         },
         {
             title: 'Condition', 
@@ -58,7 +47,7 @@ const SecondPage = () => {
 
     const onCheck = (checkedKeys, info) => {
         if (info.checkedNodes.length > data.length) {
-            setNewData(data)
+            setNewData(data[0].children[0].children)
         } else {
             setNewData(info.checkedNodes);
         }
@@ -71,6 +60,7 @@ const SecondPage = () => {
             <div className={classes.treeComp}>
                 <DirectoryTree
                     defaultExpandedKeys={['parent 1-0']}
+                    defaultCheckedKeys={checkedKeys}
                     treeData={data}
                     onCheck={onCheck}
                     checkable

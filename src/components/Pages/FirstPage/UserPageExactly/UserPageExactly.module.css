@@ -1,9 +1,0 @@
-.optionsArray{
-    display: flex;
-    flex-direction: column;
-}
-
-.listItem{
-    font-size: 30px;
-    text-align: left;
-}

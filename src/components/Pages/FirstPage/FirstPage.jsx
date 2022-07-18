@@ -1,29 +1,22 @@
 import React from 'react';
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Table } from 'antd';
 import 'antd/dist/antd.css';
 
-import { getData } from '../../../store/functions';
-import { AuthContext } from '../../Context/index';
-
 import classes from './FirstPage.module.css';
-
+import { storeData, newDataState } from '../../../store/dataFunctions';
 
 const FirstPage = () => {
-    const {newData, setNewData} = useContext(AuthContext)
+    const data = storeData.getData();
 
-    const data = getData();
-    console.log(data);
     const router = useNavigate();
-    const [name, setName] = useState(undefined);
 
-
-    //TODO rework with using ID
-    const goToName = (selectedRowKey) => {
-        setName(selectedRowKey);
-        router(`/first-page/${selectedRowKey}`);
+    const goToSecondPage = (id) => {
+        newDataState.setNewData(data[0].children[0].children[id]);
+        console.log(data[0].children[0].children[id-1]);
+        router('/second-page/');
     }
 
     const columns = [
@@ -32,7 +25,7 @@ const FirstPage = () => {
             title: 'Name', 
             dataIndex: 'title',
             key: 'Name' ,
-            render: (name) => <a onClick={() => goToName(name)}>{name}</a>
+            render: (text, record) => <a onClick={() => goToSecondPage(record.key)}>{text}</a>
         },
         {
             title: 'Condition', 

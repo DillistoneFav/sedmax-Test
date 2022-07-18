@@ -14,8 +14,7 @@ const FirstPage = () => {
     const router = useNavigate();
 
     const goToSecondPage = (id) => {
-        newDataState.setNewData(data[0].children[0].children[id]);
-        console.log(data[0].children[0].children[id-1]);
+        newDataState.setNewData(data[0].children[0].children[id-1]);
         router('/second-page/');
     }
 

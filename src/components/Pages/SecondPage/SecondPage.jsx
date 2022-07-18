@@ -1,24 +1,17 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import classes from './SecondPage.module.css';
 import { Tree, Table } from 'antd';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import 'antd/dist/antd.css';
 import { storeData, newDataState } from '../../../store/dataFunctions';
+import { observer } from 'mobx-react';
 
-const SecondPage = () => {
-    const data = storeData.getData();
-    const [newData, setNewData] = useState(newDataState.newData);
-    console.log(newData);
+const SecondPage = observer(() => {
 
     const { DirectoryTree } = Tree;
 
-    let checkedKeys = [];
-    for (let item of newData) {
-        checkedKeys.push(item.key);
-    }
-    
     const columns = [
         { title: 'ID', dataIndex: 'key', key: 'key' },
         { 
@@ -37,7 +30,7 @@ const SecondPage = () => {
             title: 'Adresses', 
             dataIndex: 'Adresses',
             key: 'Adresses', 
-            render: (item) => item + ' '
+            render: (item) => item.join(', ')
         },
         {
             title: 'Actions',
@@ -45,13 +38,8 @@ const SecondPage = () => {
         }
     ];
 
-    const onCheck = (checkedKeys, info) => {
-        if (info.checkedNodes.length > data.length) {
-            setNewData(data[0].children[0].children)
-        } else {
-            setNewData(info.checkedNodes);
-        }
-        console.log(newData);
+    const onCheck = (checkedNodes, info) => {
+        newDataState.onCheck(checkedNodes, info)
     }
 
 
@@ -60,8 +48,8 @@ const SecondPage = () => {
             <div className={classes.treeComp}>
                 <DirectoryTree
                     defaultExpandedKeys={['parent 1-0']}
-                    defaultCheckedKeys={checkedKeys}
-                    treeData={data}
+                    defaultCheckedKeys={newDataState.checkedKeys}
+                    treeData={newDataState.data}
                     onCheck={onCheck}
                     checkable
                 />
@@ -69,11 +57,12 @@ const SecondPage = () => {
             <div className={classes.tableComp}>
                 <Table
                     columns={columns}
-                    dataSource={newData}
+                    dataSource={newDataState.newData}
                 />
             </div>
         </div>
     );
-};
+});
+
 
 export default SecondPage;

@@ -1,7 +1,7 @@
 import { observable, makeAutoObservable } from "mobx";
 import tableData from '../store/data.json';
 
-export const storeData = observable({
+export const storeData = makeAutoObservable({
     getData(){
         return JSON.parse(JSON.stringify(tableData))
     }
@@ -13,6 +13,7 @@ export const newDataState = makeAutoObservable({
     checkedKeys: [],
     
     setNewData(item){
+        this.checkedKeys = [];
         this.newData = [];
         this.newData.push(item);
         for (let item of this.newData) {
@@ -21,11 +22,14 @@ export const newDataState = makeAutoObservable({
     },
 
     onCheck (checkedNodes, info) {
-        const data = storeData.getData();
-        if (info.checkedNodes.length > data[0].children[0].children.length) {
-            this.newData = (data[0].children[0].children)
+        this.checkedKeys = [];
+        if (info.checkedNodes.length > this.data[0].children[0].children.length) {
+            this.newData = (this.data[0].children[0].children)
         } else {
             this.newData = (info.checkedNodes);
+        }
+        for (let item of this.newData) {
+            this.checkedKeys.push(item.key);
         }
     }
 })

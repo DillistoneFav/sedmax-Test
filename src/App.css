@@ -10,3 +10,12 @@
 .ant-tree.ant-tree-block-node .ant-tree-list-holder-inner .ant-tree-node-content-wrapper {
   flex: unset !important;
 }
+
+.ant-modal-content{
+  width: 750px !important;
+}
+
+.ant-select{
+  display: flex !important;
+  align-items: center !important;
+}

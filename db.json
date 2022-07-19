@@ -1,0 +1,61 @@
+{
+  "users": [
+    {
+      "title": "parent 1",
+      "key": "parent 1",
+      "children": [
+        {
+          "title": "parent 1-0",
+          "key": "parent 1-0",
+          "children": [
+              {
+                  "key": 1,
+                  "title": "John",
+                  "Condition": true,
+                  "Email": "John@example.com",
+                  "Adresses": ["Moscow"]
+              },
+              {
+                  "key": 2,
+                  "title": "Johan",
+                  "Condition": true,
+                  "Email": "Johan@example.com",
+                  "Adresses": ["Moscow", "SPB", "Oslow"]
+              },
+              {
+                  "key": 3,
+                  "title": "Max",
+                  "Condition": false,
+                  "Email": "Max@example.com",
+                  "Adresses": ["Vologda", "SPB"]
+              },
+              {
+                  "key": 4,
+                  "title": "Ita",
+                  "Condition": true,
+                  "Email": "Ita@example.com",
+                  "Adresses": ["Moskow", "Leningrad", "SPB", "NewYork"]
+              },
+              {
+                  "key": 5,
+                  "title": "Kein",
+                  "Condition": false,
+                  "Email": "Kein@example.com",
+                  "Adresses": ["SPB", "Krasnodar", "Kaluga"]
+              }
+          ]            
+        }
+      ]
+  }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}

@@ -1,6 +1,7 @@
 import { observable, makeAutoObservable } from "mobx";
 import tableData from '../store/data.json';
 
+
 export const storeData = makeAutoObservable({
     getData(){
         return JSON.parse(JSON.stringify(tableData))

@@ -20,3 +20,38 @@
     display: flex;
     justify-content: space-between;
 }
+
+.modalField{
+    width: 750px !important;
+}
+
+.modalArea{
+    display: flex;
+}
+
+.leftSideModal{
+    margin-right: 10px;
+    width: 100px;
+    align-items: flex-end;
+    height: 180px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.rightSideModal{
+    width: 100%;
+    height: 180px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.leftSideModal *, .rightSideModal *{
+    height: 30px;
+}
+
+.modalArea span {
+    display: flex;
+    align-items: center;
+}

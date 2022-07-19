@@ -1,34 +1,29 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import classes from './SecondPage.module.css';
-import { Tree, Table, Modal } from 'antd';
+import { Tree, Table, Modal, Input, Select } from 'antd';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import 'antd/dist/antd.css';
-import { newDataState } from '../../../store/dataFunctions';
+import { newDataState, storeData } from '../../../store/dataFunctions';
 import { observer } from 'mobx-react';
+
 
 const SecondPage = observer(() => {
     const [isModalVisible, setIsModalVisible] = useState(false);
 
-    const showModal = () => {
-        setIsModalVisible(true);
-    };
-    
-    const handleOk = () => {
-        setIsModalVisible(false);
-    };
-    
-    const handleCancel = () => {
-        setIsModalVisible(false);
-    };
 
-
+    const [editingObject, setEditingObject] = useState({});
     const [isEditable, setIsEditable] = useState(false);
 
     const { DirectoryTree } = Tree;
+    const { Option } = Select;
 
     const columns = [
-        { title: 'ID', dataIndex: 'key', key: 'key' },
+        { 
+            title: 'ID', 
+            dataIndex: 'key', 
+            key: 'key' 
+        },
         { 
             title: 'Name', 
             dataIndex: 'title',
@@ -40,7 +35,10 @@ const SecondPage = observer(() => {
             key: 'Condition',
             render: (bool) => bool ? "true" : "false"
         },
-        { title: 'Email', dataIndex: 'Email', key: 'Email', },
+        { 
+            title: 'Email', 
+            dataIndex: 'Email', 
+            key: 'Email', },
         { 
             title: 'Adresses', 
             dataIndex: 'Adresses',
@@ -49,10 +47,10 @@ const SecondPage = observer(() => {
         },
         {
             title: 'Actions',
-            render: () => 
+            render: (text, record) => 
                 <div className={classes.Actions}>
-                    <EditOutlined pointer="true" onClick={onEdit}/>
-                    <DeleteOutlined pointer="true" onClick={onDelete}/>
+                    <EditOutlined pointer="true" onClick={() => onEdit(record.key)}/>
+                    <DeleteOutlined pointer="true" onClick={() => onDelete(record.key)}/>
                 </div> 
         }
     ];
@@ -60,10 +58,25 @@ const SecondPage = observer(() => {
     const onCheck = (checkedNodes, info) => {
         newDataState.onCheck(checkedNodes, info)
     }
-
-    const onEdit = (extraCommonProps) => {
+//////////////////////////////////////////////////////////////////////
+    const showModal = () => {
+        setIsModalVisible(true);
+    };
+    
+    const handleOk = () => {
+        setIsModalVisible(false);
+    };
+    
+    const handleCancel = () => {
+        setIsModalVisible(false);
+    };
+/////////////////////////////////////////////////////////////////////
+    const onEdit = (key) => {
+        const data = storeData.getData();
         showModal();
-        console.log(extraCommonProps);
+        setIsEditable(true);
+        setEditingObject(data[0].children[0].children[key-1])
+
     }
 
     const onDelete = (extraCommonProps) => {
@@ -88,10 +101,29 @@ const SecondPage = observer(() => {
                     dataSource={newDataState.newData}
                 />
             </div>
-            <Modal title="Edit user" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-                <p>Some contents...</p>
-                <p>Some contents...</p>
-                <p>Some contents...</p>
+            <Modal className={classes.modalField} title="Edit user" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+                <div className={classes.modalArea}>
+                    <div className={classes.leftSideModal}>
+                        <span>ID:</span>
+                        <span>Name:</span>
+                        <span>Condition:</span>
+                        <span>Email:</span>
+                        <span>Adresses:</span>
+                    </div>
+                    <div className={classes.rightSideModal}>
+                        <span>{editingObject.key}</span>
+                        <Input value={editingObject.title}></Input>
+                        <Select
+                            defaultValue={editingObject.Condition ? "true" : "false" }
+                            onChange={(selectedValue) => console.log(selectedValue)}
+                        >
+                            <Option value="true">true</Option>
+                            <Option value="false">false</Option>
+                        </Select>
+                        <Input value={editingObject.Email}></Input>
+                        <Input value={editingObject.Adresses.join(", ")}></Input>
+                    </div>
+                </div>
             </Modal>
         </div>
     );

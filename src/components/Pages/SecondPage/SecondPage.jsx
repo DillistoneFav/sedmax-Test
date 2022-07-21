@@ -11,9 +11,17 @@ import { observer } from 'mobx-react';
 const SecondPage = observer(() => {
     const [isModalVisible, setIsModalVisible] = useState(false);
 
-
-    const [editingObject, setEditingObject] = useState({});
-    const [isEditable, setIsEditable] = useState(false);
+    const [adressesString, setAdressesString] = useState('');
+    const [editingKey, setEditingKey] = useState(0);
+    const [editingObject, setEditingObject] = useState(
+        {
+            key: 0,
+            title: '',
+            Condition: false,
+            Email: '',
+            Adresses: [],
+        }
+    );
 
     const { DirectoryTree } = Tree;
     const { Option } = Select;
@@ -65,6 +73,8 @@ const SecondPage = observer(() => {
     
     const handleOk = () => {
         setIsModalVisible(false);
+        editingObject.Adresses = [...adressesString]
+        newDataState.newData[0].children[0].children[editingKey] = editingObject;
     };
     
     const handleCancel = () => {
@@ -72,11 +82,9 @@ const SecondPage = observer(() => {
     };
 /////////////////////////////////////////////////////////////////////
     const onEdit = (key) => {
-        const data = storeData.getData();
+        setEditingKey(key-1);
+        setEditingObject(newDataState.data[0].children[0].children[editingKey])
         showModal();
-        setIsEditable(true);
-        setEditingObject(data[0].children[0].children[key-1])
-
     }
 
     const onDelete = (extraCommonProps) => {
@@ -112,16 +120,16 @@ const SecondPage = observer(() => {
                     </div>
                     <div className={classes.rightSideModal}>
                         <span>{editingObject.key}</span>
-                        <Input value={editingObject.title}></Input>
+                        <Input defaultValue={editingObject.title} onChange={event => editingObject.title = event.target.value}></Input>
                         <Select
                             defaultValue={editingObject.Condition ? "true" : "false" }
-                            onChange={(selectedValue) => console.log(selectedValue)}
+                            onChange={(selectedValue) => editingObject.Condition = selectedValue}
                         >
                             <Option value="true">true</Option>
                             <Option value="false">false</Option>
                         </Select>
-                        <Input value={editingObject.Email}></Input>
-                        <Input value={editingObject.Adresses.join(", ")}></Input>
+                        <Input defaultValue={editingObject.Email} onChange={event => editingObject.Email = event.target.value}></Input>
+                        <Input defaultValue={editingObject.Adresses.join(", ")} onChange={event => setAdressesString(event.target.value)}></Input>
                     </div>
                 </div>
             </Modal>
